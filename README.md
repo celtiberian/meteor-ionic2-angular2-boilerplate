@@ -59,7 +59,7 @@ In the other way, the `/.mobile` folder contains the Ionic2 application:
 - `src` - Contains single TypeScript (`.ts`) file which is the main file (`/app/app.component.ts`), and 
           bootstrap's the Ionic 2 application. The main component uses HTML template and SASS file. The `index.html` file is the main HTML which loads the application by using the main 
           component selector (`<ion-app>`).
-- `resources` - Contains the resources used by the Ionic 2 application. It differences Android and iOS resources.
+- `resources` - Contains the resources used by the Ionic 2 application. It differentiates between Android and iOS resources.
         
 
 ## Meteor application
