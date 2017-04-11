@@ -4,9 +4,15 @@ A raw boilerplate project for both web/mobile client and server using Angular 2,
 
 ## Install Packages
 
+First of all, you need to install Meteor and Ionic2 following the steps in the next links:
+
+- [Meteor Installation](https://www.meteor.com/install)
+- [Ionic 2 Installation](http://ionicframework.com/docs/intro/installation/)
+
 To start using this application run the following commands:
 
 - `$ meteor npm install` - Installs the necessary packages to use the Meteor application.
+- `$ cd .mobile` - Moves to Ionic 2 directory.
 - `.mobile$ npm install` - Installs the necessary packages to use the Ionic 2 application.
 
 ## Using Meteor application
