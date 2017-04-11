@@ -12,7 +12,6 @@ import { DemoDataService } from "./demo/demo-data.service";
   ],
   // Entry Components
   entryComponents: [
-    AppComponent
   ],
   // Providers
   providers: [
