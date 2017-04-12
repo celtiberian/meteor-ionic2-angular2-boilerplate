@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor-client';
 import {Component, NgZone} from '@angular/core';
 import { NavController } from 'ionic-angular';
 
