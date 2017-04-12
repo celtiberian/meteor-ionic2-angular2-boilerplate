@@ -2,18 +2,27 @@
 
 A raw boilerplate project for both web/mobile client and server using Angular 2, Ionic 2 and Meteor
 
-## Install Packages
+## Get Ready
 
-First of all, you need to install Meteor and Ionic2 following the steps in the next links:
+First of all, you need to install (or update) Meteor and Ionic2 following the steps in the next links:
 
 - [Meteor Installation](https://www.meteor.com/install)
-- [Ionic 2 Installation](http://ionicframework.com/docs/intro/installation/)
+- [Ionic 2 Installation / Update](http://ionicframework.com/docs/intro/installation/)
+  - `npm install -g ionic`
 
 To start using this application run the following commands:
 
-- `$ meteor npm install` - Install the necessary packages to use the Meteor application.
-- `$ cd .mobile` - Change to Ionic 2 directory.
-- `.mobile$ npm install` - Install the necessary packages to use the Ionic 2 application.
+- `cd <project root folder>`
+- `meteor npm install` - Install the necessary packages to use the Meteor application.
+- `cd .mobile` - Change to Ionic 2 directory.
+  - `npm install` - Install the necessary packages to use the Ionic 2 application.
+  - Windows: `mkdir www`
+  - Mac/Linux: `md www`
+  - `ionic platform add android` - To add Android platform to Ionic 2 project.
+  - `ionic platform add ios` - To add iOS platform to Ionic 2 project.
+  - `npm install -g meteor-client-bundler`
+  - `meteor-client bundle -c meteor-client.config.json` - tell the Ionic app what is the URL of the server and what Meteor packages it needs. Run this line again if they change. `NOTE`: it might take a few minutes, be patient. In Windows there's a bug printing text in the console, but it works.
+
 
 ## Windows Troubleshooting
 
@@ -31,26 +40,42 @@ To run the Meteor application, you have to install the necessary packages firstl
 
 It is not possible to run only the server Meteor. It is neccesary to run both: web application and Meteor server.
 
-## Using Ionic 2 application
+- in production add '--production' to meteor arguments.
+
+## Launch Ionic 2 app
 
 If you want to run the mobile application, you have to add iOS and Android platforms:
 
-- `.mobile$ ionic platform add android` - To add Android platform to Ionic 2 project.
-- `.mobile$ ionic platform add ios` - To add iOS platform to Ionic 2 project.
-
-In order to connect the mobile application with Meteor server, you have to run:
-
-- `.mobile$ meteor-client bundle -c meteor-client.config.json`
-
 To test the mobile application in your web browser, you have to run the following command:
 
-- `.mobile$ ionic serve` - This will run the mobile application in your web browser using the default URL `http:\\localhost:8100`.
+- `cd <project root folder>/.mobile`
+- `ionic serve` - This will run the mobile application in your web browser using the default URL `http:\\localhost:8100`.
 
 If you want to run this application in a mobile device, it is recommended to use Ionic Cloud. The steps to use this are described in [Ionic Cloud setup](https://docs.ionic.io/setup.html).
 Then, you have to download the Ionic Cloud application in your mobile device, log in, and run this Ionic 2 application.
 
 You can also run this application in a mobile device using an USB cable. You can follow the steps explained in [Ionic 2 deploying](https://ionicframework.com/docs/intro/deploying).
 
+## Develop and Debug with WebStorm
+
+- in WebStorm => 'Open Folder => root folder of this boilerplate
+- Run Menu => Edit Configurations => +  (to add a new configuration)
+  - Choose 'Meteor' as the base configuration and give a name to the new one (i.e. 'Meteor App')
+    - in 'Configuration' tab:
+      - Make sure the paths of the meteor executable and the project folder are correct.
+      - in production add '--production' to meteor arguments.
+    - in Browser/Live Edit Tab
+      - Enable 'After launch', use Chrome, with 'Javascript Debugger'.
+      - make sure the URL is 'http://localhost:3000'
+- click Apply.
+- Install the 'JetBrains IDE Support' extension in Chrome.
+- click Run or Debug.
+
+## Profile
+
+- `meteor add v8-profiler`
+- `meteor shell`
+  -
 
 ## Folder structure
 
