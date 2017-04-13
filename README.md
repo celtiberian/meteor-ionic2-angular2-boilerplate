@@ -8,8 +8,11 @@ First of all, you need to install (or update) Meteor and Ionic2 following the st
 
 - [Meteor Installation](https://www.meteor.com/install)
 - [Ionic 2 Installation / Update](http://ionicframework.com/docs/intro/installation/)
-  - `npm install -g ionic`
-
+  - `npm install -gg`
+- Typescript:
+  - `npm install typings -g`
+  - `typings install registry:env/meteor --global`
+  
 To start using this application run the following commands:
 
 - `cd <project root folder>`
@@ -56,7 +59,7 @@ Then, you have to download the Ionic Cloud application in your mobile device, lo
 
 You can also run this application in a mobile device using an USB cable. You can follow the steps explained in [Ionic 2 deploying](https://ionicframework.com/docs/intro/deploying).
 
-## Develop and Debug with WebStorm
+## Debug Server and Web App with WebStorm
 
 - in WebStorm => 'Open Folder => root folder of this boilerplate
 - Run Menu => Edit Configurations => +  (to add a new configuration)
@@ -71,7 +74,17 @@ You can also run this application in a mobile device using an USB cable. You can
 - Install the 'JetBrains IDE Support' extension in Chrome.
 - click Run or Debug.
 
+## Debug Mobile App with a Browser
+
+- `cd <project root folder>/.mobile`
+- `ionic serve`
+- Open the browser at `http://localhost:8100`
+- Open Development Tools to inspect the source code
+- You'll see your sources and will be able to place breakpoints, etc.
+
 ## Profile
+
+This section is Work In Progress.
 
 - `meteor add v8-profiler`
 - `meteor shell`
