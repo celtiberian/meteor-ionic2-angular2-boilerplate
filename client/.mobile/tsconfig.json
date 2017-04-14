@@ -12,7 +12,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "paths": {
-      "meteor/*": ["../server/*"]
+      "meteor/*": ["../../*"]
     },
     "sourceMap": true,
     "target": "es5",
@@ -23,7 +23,6 @@
   "include": [
     "src/**/*.ts",
     "meteor/**/*.ts"
-
   ],
   "exclude": [
     "node_modules",

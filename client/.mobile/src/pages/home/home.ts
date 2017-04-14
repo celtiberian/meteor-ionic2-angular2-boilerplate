@@ -1,6 +1,7 @@
-import Meteor from 'meteor-client';
 import {Component, NgZone} from '@angular/core';
 import { NavController } from 'ionic-angular';
+
+import { Meteor } from 'meteor/meteor';
 
 @Component({
   selector: 'page-home',
@@ -12,10 +13,12 @@ export class HomePage {
 
   constructor(private navCtrl: NavController, private zone: NgZone) {
     this.text = "You have not pressed any button yet";
+    console.log(Meteor);
   }
 
   private onPress(id: number) {
     let self = this;
+    console.log(Meteor);
 
     if (Meteor.status().connected) {
       Meteor.call('getTextForButton', id, function (error, result) {
