@@ -1,0 +1,1 @@
+Images, icons and other resources not shared with other clients.
