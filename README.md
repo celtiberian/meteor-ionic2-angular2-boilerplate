@@ -38,9 +38,9 @@ Meteor might not work or be too slow on Windows platforms. The following might h
 - disable the AntiVirus
 - use a CMD with admin privileges
 
-## Fast Prototypes
+## Security Warning
 
-**WARNING**: This Meteor project is configured for fast prototyping. All clients will receive the whole server database (*[AutoPublish](https://www.meteor.com/tutorials/blaze/publish-and-subscribe)*), even the secrets from other users! and will be able to modify the whole database without authorization ([Insecure](https://www.meteor.com/tutorials/blaze/security-with-methods)). This speeds up prototypes as we don't need to query the server database, check permissions or subscribe to publications. Just focus on UI/UX.
+This Meteor project is configured for **fast prototyping**. All clients will receive the whole server database (*[AutoPublish](https://www.meteor.com/tutorials/blaze/publish-and-subscribe)*), even the secrets from other users! and will be able to modify the whole database without authorization ([Insecure](https://www.meteor.com/tutorials/blaze/security-with-methods)). This speeds up prototypes as we don't need to query the server database, check permissions or subscribe to publications. Just focus on UI/UX.
 - To disable AutoPublish: `meteor remove autopublish`.
 - To disable Insecure: `meteor remove insecure`
 
@@ -134,6 +134,7 @@ For more information [read the Meteor instructions](https://guide.meteor.com/dep
       - `SET ROOT_URL=http://my-app.com`
       - `SET PORT=3000`
       - `meteor node main`
+    - TODO: finish and test `node meteor_forever` to restart the server if it crashes or source code is updated.
 
   - **Didn't work for us (with Meteor 1.4.4.1)**:
     - we were not able to run the production bundle outside `.meteor/local/build`.
@@ -145,8 +146,8 @@ This boilerplate is inspired but doesn't strictly follow the [Meteor 1.3 recomme
 
 From the perspective of Build Tools, there are 2 nested projects:
 
-- `<project root folder>` - Meteor project. All config files belong to Meteor.
- - `/client/.mobile` - Ionic 2 project. All config files belong to Ionic.
+- `/` - Meteor project. All config files belong to Meteor.
+- `/client/.mobile` - Ionic 2 project. All config files belong to Ionic.
 
 The code is structured as follows:
 
