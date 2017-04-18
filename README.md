@@ -1,6 +1,8 @@
 # Meteor - Ionic 2 - Angular 2 boilerplate
 
-A raw boilerplate project for both web/mobile client and server using Angular 2, Ionic 2 and Meteor
+A boilerplate using Meteor+Angular2 for the **server and web app**, as well as Meteor+Ionic2+Angular2 for **mobile**.
+
+If you need help to make this run, please create a Github issue. If you need a developer for your project based on this stack, you can [hire an expert at Celtiberian](http://www.celtiberian.es).
 
 ## Get Ready
 
@@ -134,7 +136,9 @@ For more information [read the Meteor instructions](https://guide.meteor.com/dep
       - `SET ROOT_URL=http://my-app.com`
       - `SET PORT=3000`
       - `meteor node main`
-    - TODO: finish and test `node meteor_forever` to restart the server if it crashes or source code is updated.
+    - to daemonize the server, restarting on crashes or source code changes:
+      - `npm install forever -g`
+      - `forever -c "meteor node" -w --watchDirectory program main.js`
 
   - **Didn't work for us (with Meteor 1.4.4.1)**:
     - we were not able to run the production bundle outside `.meteor/local/build`.
@@ -142,43 +146,34 @@ For more information [read the Meteor instructions](https://guide.meteor.com/dep
 
 ## Project structure
 
-This boilerplate is inspired but doesn't strictly follow the [Meteor 1.3 recommendation](https://guide.meteor.com/structure.html) and [Ionic 2 recommendation](http://moduscreate.com/ionic-2-project-structure).
-
-From the perspective of Build Tools, there are 2 nested projects:
+From the point of view of Build Tools, there are 2 nested projects:
 
 - `/` - Meteor project. All config files belong to Meteor.
 - `/client/.mobile` - Ionic 2 project. All config files belong to Ionic.
 
-The code is structured as follows:
+This boilerplate is inspired but doesn't strictly follow the [Meteor 1.3 recommendation](https://guide.meteor.com/structure.html) and [Ionic 2 recommendation](http://moduscreate.com/ionic-2-project-structure). The following basic restrictions were respected:
+- Meteor shares all code between server and clients, except code hanging from folders called `server/` or `client/`, that may appear multiple times in different parts of the folder structure.
+- Meteor ignores folders that start with a dot, like `.mobile/`
+- Both Meteor and Ionic have strict requirements regarding the location of entry point files and startup files. Leave them even if you don't like how they are named or organized.
+- Meteor needs that all your importable files reside in an `imports/` folder. That's weird but needed for backward compatibility. Ionic doesn't need it.
+
+The proposed structure tries to make both platforms as similar as possible:
 
 - `/client`
-  - `/web` - Meteor web app
+  - `/web/imports` - Meteor web app
+    - `/app` - **startup code**: declare pages, routes, headers, footers, menus, jump to 1st page.
+    - `/pages` - **UI and logic** of pages, with components and subcomponents.
+    - `/assets` - **icons, images**, sounds, etc, to be used exclusively by this client (not shared).
   - `/.mobile` - Ionic2 mobile app. The dot tells Meteor to ignore this folder when building the server and web apps.
-- `server` - Meteor server
-- `both` - code shared between server and clients.
-
-## Web App Structure
-
-- `/index.html` - standard Angular2
-- `/main.ts` - standard Angular2 + Meteor
-- `/styles`- SCSS, one per component
-
-
-    - `/client/app.component.ts` - , and
-bootstrap's the Angular 2 application. The main component uses HTML template and SASS file. The `index.html` file is the main HTML which loads the application by using the main
-component selector (`<app>`). All the other client files are under `client/imports` and organized by the context of the components (in our example, the context is `demo`).
-- `server` - Contains the Meteor server which is based on Node.js. There is a single TypeScript (`.ts`) file which is the main file (`/server/main.ts`),
-and creates the main server instance, and then starts it. The `/methods` folder should contain the different methods which can be called from web and mobile applications.
-All other server files should be located under `/server/imports`.
-- `both` - Contains the files which are shared by the Meteor server and the web application (collections and models).
-
-In the other way, the `/.mobile` folder contains the Ionic2 application:
-
-- `src` - Contains single TypeScript (`.ts`) file which is the main file (`/app/app.component.ts`), and
-          bootstrap's the Ionic 2 application. The main component uses HTML template and SASS file. The `index.html` file is the main HTML which loads the application by using the main
-          component selector (`<ion-app>`).
-- `resources` - Contains the resources used by the Ionic 2 application. It differentiates between Android and iOS resources.
-
+    - `/app` - **startup code** (see above).
+    - `/pages` - **UI and logic** (see above).
+    - `/assets` - **icons, images** (see above).
+    - `/themes` - Ionic2 global styles (aka [Themes](http://ionicframework.com/docs/theming/)).
+- `/server/imports` - Meteor server
+  - `main.ts` - init data and import all server dependencies.
+- `/shared` - code shared between server and clients.
+  - `/collections/Acme/` - collection, model and methods of Acme
+  - `/methods` - methods not directly related to any collection
 
 ## Meteor application
 
@@ -186,7 +181,7 @@ The Meteor application contains the `client`, `server` and `both` folders, and a
 
 - `package.json` - Contains the dependencies of the Meteor project.
 - `tsconfig.json` - It is the configuration file of the Meteor project.
-- `typings.d.ts` - Declares the default modules which are used in the Meteor project.
+- `typings.d.ts` - It declares Javascript modules as Typescript.
 
 ## Ionic 2 application
 

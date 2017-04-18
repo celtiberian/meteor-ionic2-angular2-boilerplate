@@ -6,7 +6,7 @@ import {TestBed, TestModuleMetadata} from "@angular/core/testing";
 
 // Project imports
 import {DemoComponent} from "./demo.component";
-import {Demo} from "../../../../both/models/demo.model";
+import {Demo} from "../../../../shared/models/demo.model";
 import {DemoDataService} from "./demo-data.service";
 import {Observable, BehaviorSubject} from "rxjs";
 
