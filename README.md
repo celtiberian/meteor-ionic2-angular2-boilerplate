@@ -121,13 +121,12 @@ For more information [read the Meteor instructions](https://guide.meteor.com/dep
   - delete `<project folder>/node_modules` and `<project folder>/.meteor/local`
   - `cd <project folder>`
   - `npm install --production`
-  - `meteor build ./build`
   - launch MongoDB:
     - 1st time, you'll need to create an empty folder i.e. `<project>/db`
     - `mongod --port 27017 --dbpath "<project>/db"`
   - Alternative 1, convenient with hot-reload but inefficient and less secure:
-    - `meteor --production`
-  - Alternative 2, without hot-reload, more efficient and secure:
+    - `meteor --production` - this will create a production bundle and run it.
+    - stop with CTRL-C: although it works, but is innefficient and insecure. We already have a working bundle, let's launch it manually without meteor.
     - `cd <project>/.meteor/local/build`
     - Linux/OSX:
       - `MONGO_URL=mongodb://localhost:27017/myapp ROOT_URL=http://my-app.com PORT=3000 meteor node main`
