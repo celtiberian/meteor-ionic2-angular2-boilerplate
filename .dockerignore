@@ -1,0 +1,11 @@
+.idea
+build
+dist
+.git
+.deploy
+.meteor/local
+client/.mobile
+node_modules
+db
+logs
+

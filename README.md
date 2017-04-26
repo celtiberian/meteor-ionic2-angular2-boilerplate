@@ -114,7 +114,17 @@ Android:
 - Install the 'JetBrains IDE Support' extension in Chrome.
 - click Run or Debug.
 
-## Production Deployment
+## Production Deployment (Docker)
+
+- Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/)
+- Open Docker QuickStart Terminal. The docker image should be built without errors. Close it afterwards.
+- if docker is not running: `docker-machine start default`
+- `cd <project>/docker`
+- `build_images.bat` or `build_images.sh`
+- `launch_db.bat` or `launch_db.sh`
+- `launch_app.bat` or `launch_app.sh`
+
+## Production Deployment (Manual)
 
 For more information [read the Meteor instructions](https://guide.meteor.com/deployment.html#custom-deployment). We found the following methods to be easy and reliable:
 

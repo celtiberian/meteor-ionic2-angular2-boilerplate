@@ -1,0 +1,38 @@
+FROM meteor:base
+
+COPY . .	
+
+# from https://docs.mongodb.com/v3.0/tutorial/install-mongodb-on-debian/
+RUN	apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10    && \
+	echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list    && \
+	apt-get update   && \
+	apt-get install -y mongodb-org
+
+# prepare the folder where the db will be created
+RUN	mkdir -p /data/db  && \
+	chown -R mongodb:mongodb /data   && \
+	chmod -R 666 /data   && \
+	find /data -type d -exec chmod 744 {} \; 
+
+# make sure all files are owned by user meteor and only have read/write permissions (except shell scrips that need to be executable)
+RUN	chown -R mongodb:mongodb .  && \
+	chmod -R 666 .  && \
+	find . -type d -exec chmod 744 {} \;  && \
+	chmod 766 docker/*.sh
+
+# prepare access from external IP, and configure replica set (to enable OPLOG tailing in Meteor)
+RUN	perl -pi -e "s/^  bindIp: 127\.0\.0\.1/  bindIp: 0.0.0.0/" /etc/mongod.conf
+
+
+USER mongodb 
+
+RUN	mongod --fork --syslog  && \
+	sleep 10  && \
+	mongo admin --eval 'db.createUser({user: "oplogger", pwd: "oplogger", roles: [{role: "read", db: "local"}]})'  && \
+	mongod --shutdown --dbpath /data/db
+
+EXPOSE 27017
+
+# Execute entrypoint as user meteor
+ENTRYPOINT ["/home/meteor/app/docker/db_entrypoint.sh"]
+CMD []
