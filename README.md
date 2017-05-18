@@ -116,13 +116,19 @@ Android:
 
 ## Production Deployment (Docker)
 
+This process will create 2 docker images, for the mongodb and the meteor app. The mongodb will have OPLOG enabled (LiveQuery, efficient real-time reactiveness between server and clients). When launched, each image will be run in separate containers. The MongoDB port won't be published outside the docker network. The meteor app port will be published, at port 3000. If you need to use another port, edit the PORT variable in `launch_app.*` script and the EXPOSE statement in `Dockerfile.app`. 
+
 - Install [Docker Toolbox](https://docs.docker.com/toolbox/overview/)
-- Open Docker QuickStart Terminal. The docker image should be built without errors. Close it afterwards.
+- Open Docker QuickStart Terminal. The docker image should build without errors. Close it afterwards.
 - if docker is not running: `docker-machine start default`
 - `cd <project>/docker`
 - `build_images.bat` or `build_images.sh`
 - `launch_db.bat` or `launch_db.sh`
 - `launch_app.bat` or `launch_app.sh`
+
+To test, find the IP of the docker machine with `docker-machine ip default`, and direct your browser to `http://<ip of docker machine>:3000`.
+
+If you need to use
 
 ## Production Deployment (Manual)
 

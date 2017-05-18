@@ -1,12 +1,9 @@
-FROM meteor:base
+FROM alpine:edge
+WORKDIR /home/mongodb
 
-COPY . .	
+COPY ./docker /home/mongodb/docker/	
 
-# from https://docs.mongodb.com/v3.0/tutorial/install-mongodb-on-debian/
-RUN	apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10    && \
-	echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list    && \
-	apt-get update   && \
-	apt-get install -y mongodb-org
+RUN adduser mongodb -h /home/mongodb -s /bin/sh -D
 
 # prepare the folder where the db will be created
 RUN	mkdir -p /data/db  && \
@@ -21,11 +18,10 @@ RUN	chown -R mongodb:mongodb .  && \
 	chmod 766 docker/*.sh
 
 # prepare access from external IP, and configure replica set (to enable OPLOG tailing in Meteor)
-RUN	perl -pi -e "s/^  bindIp: 127\.0\.0\.1/  bindIp: 0.0.0.0/" /etc/mongod.conf
-
-
+RUN	apk --update add --no-cache mongodb && \
+	rm /usr/bin/mongoperf
+	
 USER mongodb 
-
 RUN	mongod --fork --syslog  && \
 	sleep 10  && \
 	mongo admin --eval 'db.createUser({user: "oplogger", pwd: "oplogger", roles: [{role: "read", db: "local"}]})'  && \
@@ -34,5 +30,5 @@ RUN	mongod --fork --syslog  && \
 EXPOSE 27017
 
 # Execute entrypoint as user meteor
-ENTRYPOINT ["/home/meteor/app/docker/db_entrypoint.sh"]
+ENTRYPOINT ["/home/mongodb/docker/db_entrypoint.sh"]
 CMD []

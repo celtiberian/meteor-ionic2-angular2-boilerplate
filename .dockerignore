@@ -1,11 +1,13 @@
 .idea
-build
 dist
 .git
 .deploy
-.meteor/local
-client/.mobile
+.meteor
+client
 node_modules
 db
 logs
-
+client
+server
+shared
+.build

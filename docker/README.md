@@ -12,6 +12,7 @@
 - Share volumes in Windows outside c:\Users:
 `"%VBOX_MSI_INSTALL_PATH%\VBoxManage.exe" sharedfolder add default --name "<src>" --hostpath "c:\"` - this will enable the `-v`option to mount volumes using any directory under `C:\`
 - Set/Update CMD docker environment variables (Windows): `@FOR /f "tokens=*" %i IN ('docker-machine env --shell cmd') DO @%i`
+- Set/Update BASH environment variables (Mac): `eval $(docker-machine env default)`
 - get the IP of the docker machine: `docker-machine ip default`
 - to get a bash in a container with user root: `docker exec -u root -it "id of running container" bash`
 - list all containers: `docker ps -a`
